@@ -1,4 +1,5 @@
-﻿namespace SisClientes.Data.Dtos.Endereco
+﻿namespace SisClientes.Data.Dtos
+
 {
     public class LerTodosEnderecosDto
     {

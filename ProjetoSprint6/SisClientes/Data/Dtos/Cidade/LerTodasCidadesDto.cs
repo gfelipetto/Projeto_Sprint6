@@ -1,11 +1,9 @@
-﻿using SisClientes.Data.Dtos.Cliente;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace SisClientes.Data.Dtos.Cidade
+namespace SisClientes.Data.Dtos
 {
     public class LerTodasCidadesDto
     {
-        public int Id { get; set; }
         public string Nome { get; set; }
         public string Estado { get; set; }
         public IList<LerClienteSemCidadeDto> ClientesQueHabitam { get; set; }

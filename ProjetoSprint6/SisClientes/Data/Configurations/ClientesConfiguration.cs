@@ -4,9 +4,9 @@ using SisClientes.Models;
 
 namespace SisClientes.Data.Configurations
 {
-    public class ClientesConfiguration : IEntityTypeConfiguration<LertodosClientesSemCidadeDtO>
+    public class ClientesConfiguration : IEntityTypeConfiguration<Clientes>
     {
-        public void Configure(EntityTypeBuilder<LertodosClientesSemCidadeDtO> builder)
+        public void Configure(EntityTypeBuilder<Clientes> builder)
         {
             builder.ToTable("Clientes");
 

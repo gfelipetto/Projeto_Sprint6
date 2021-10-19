@@ -48,8 +48,8 @@ namespace SisClientes.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
-                    b.Property<int>("CidadeId")
-                        .HasColumnType("int")
+                    b.Property<Guid>("CidadeId")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CidadeId");
 
                     b.Property<DateTime>("DataNascimento")

@@ -1,6 +1,4 @@
-﻿using SisClientes.Data.Dtos.Cidade;
-using SisClientes.Data.Dtos.Endereco;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace SisClientes.Data.Dtos

@@ -10,7 +10,7 @@ using SisClientes.Data;
 namespace SisClientes.Migrations
 {
     [DbContext(typeof(SisClientesDbContext))]
-    [Migration("20211019012218_CriandoBanco")]
+    [Migration("20211019191437_CriandoBanco")]
     partial class CriandoBanco
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,8 +50,8 @@ namespace SisClientes.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
-                    b.Property<int>("CidadeId")
-                        .HasColumnType("int")
+                    b.Property<Guid>("CidadeId")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CidadeId");
 
                     b.Property<DateTime>("DataNascimento")

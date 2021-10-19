@@ -11,7 +11,7 @@ namespace SisClientes.Data
 
         }
         public DbSet<Cidades> Cidades { get; set; }
-        public DbSet<LertodosClientesSemCidadeDtO> Clientes { get; set; }
+        public DbSet<Clientes> Clientes { get; set; }
         public DbSet<Enderecos> Enderecos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -1,4 +1,4 @@
-﻿namespace SisClientes.Data.Dtos.Cidade
+﻿namespace SisClientes.Data.Dtos
 {
     public class LerCidadeSemClientesDto
     {

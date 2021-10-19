@@ -27,7 +27,7 @@ namespace SisClientes.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DataNascimento = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CidadeId = table.Column<int>(type: "int", nullable: false),
+                    CidadeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ResidenteDeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>

@@ -9,10 +9,10 @@ namespace SisClientes.Models
         public string Nome { get; set; }
         public string  Estado { get; set; }
 
-        public IList<LertodosClientesSemCidadeDtO> ClientesQueHabitam { get; set; }
+        public IList<Clientes> ClientesQueHabitam { get; set; }
         public Cidades()
         {
-            ClientesQueHabitam = new List<LertodosClientesSemCidadeDtO>();
+            ClientesQueHabitam = new List<Clientes>();
         }
     }
 }

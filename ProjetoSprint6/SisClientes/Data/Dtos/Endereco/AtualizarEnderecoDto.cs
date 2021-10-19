@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace SisClientes.Data.Dtos
-
 {
-    public class CadastrarNovoEnderecoDto
+    public class AtualizarEnderecoDto
     {
         [Required(ErrorMessage = "O campo Cep é obrigatório")]
         public string Cep { get; set; }

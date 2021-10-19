@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SisClientes.Data.Dtos.Cliente
+namespace SisClientes.Data.Dtos
 {
     public class LerClienteSemCidadeDto
     {
