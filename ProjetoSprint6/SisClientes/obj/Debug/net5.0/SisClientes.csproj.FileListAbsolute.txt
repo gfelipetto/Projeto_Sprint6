@@ -64,3 +64,4 @@ C:\Users\gfeli\Desktop\Projeto_Sprint6\ProjetoSprint6\SisClientes\bin\Debug\net5
 C:\Users\gfeli\Desktop\Projeto_Sprint6\ProjetoSprint6\SisClientes\bin\Debug\net5.0\System.Net.Http.Extensions.dll
 C:\Users\gfeli\Desktop\Projeto_Sprint6\ProjetoSprint6\SisClientes\bin\Debug\net5.0\System.Net.Http.Primitives.dll
 C:\Users\gfeli\Desktop\Projeto_Sprint6\ProjetoSprint6\SisClientes\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\Users\gfeli\Desktop\Projeto_Sprint6\ProjetoSprint6\SisClientes\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

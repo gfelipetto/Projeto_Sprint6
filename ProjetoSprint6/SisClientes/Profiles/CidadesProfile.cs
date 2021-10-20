@@ -9,6 +9,7 @@ namespace SisClientes.Profiles
         public CidadesProfile()
         {
             CreateMap<Cidades, LerTodasCidadesDto>();
+            CreateMap<Cidades, LerCidadeSemClientesDto>();
             CreateMap<AtualizarCidadeDto, Cidades>();
         }
     }

@@ -30,11 +30,14 @@ namespace SisClientes.Controllers
         public async Task<IActionResult> GetTodasCidadesAsync()
         {
             var cidadesDto = new List<LerTodasCidadesDto>();
-            foreach (var cidades in _scContext.Cidades)
+
+            var listaCidades = await _scContext.Cidades.ToListAsync();
+            foreach (var cidades in listaCidades)
             {
                 cidades.ClientesQueHabitam = await _scContext.Clientes.Where(c => c.CidadeId == cidades.Id).ToListAsync();
                 cidadesDto.Add(_mapper.Map<LerTodasCidadesDto>(cidades));
             }
+
             return Ok(cidadesDto);
         }
 
@@ -90,9 +93,17 @@ namespace SisClientes.Controllers
             var cliente = await _scContext.Clientes.FirstOrDefaultAsync(c => c.CidadeId == cidade.Id);
             if (cliente != null) return BadRequest();
 
-            _scContext.Remove(cidade);
-            await _scContext.SaveChangesAsync();
-            return NoContent();
+            try
+            {
+                _scContext.Cidades.Remove(cidade);
+                await _scContext.SaveChangesAsync();
+                return NoContent();
+
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
     }
 }

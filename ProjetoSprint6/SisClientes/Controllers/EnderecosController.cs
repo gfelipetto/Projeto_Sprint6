@@ -5,6 +5,7 @@ using SisClientes.Data;
 using SisClientes.Data.Dtos;
 using SisClientes.Models;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SisClientes.Controllers
@@ -19,6 +20,20 @@ namespace SisClientes.Controllers
         {
             _scContext = sisContext;
             _mapper = mapper;
+        }
+
+        [HttpGet(template: "enderecos")]
+        public async Task<IActionResult> GetTodosEnderecosAsync()
+        {
+            var enderecosDto = new List<LerTodosEnderecosDto>();
+
+            var listaEnderecos = await _scContext.Enderecos.ToListAsync();
+            foreach (var endereco in listaEnderecos)
+            {
+                enderecosDto.Add(_mapper.Map<LerTodosEnderecosDto>(endereco));
+            }
+
+            return Ok(listaEnderecos);
         }
 
         [HttpGet(template: "enderecos/{id}")]

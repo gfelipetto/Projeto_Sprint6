@@ -30,12 +30,15 @@ namespace SisClientes.Controllers
         public async Task<IActionResult> GetTodosClientesAsync()
         {
             var clientesDto = new List<LerTodosClientesDto>();
-            foreach (var cliente in _scContext.Clientes)
+
+            var listaClientes = await _scContext.Clientes.ToListAsync();
+            foreach (var cliente in listaClientes)
             {
                 cliente.ResidenteDe = await _scContext.Cidades.FirstOrDefaultAsync(c => c.Id == cliente.CidadeId);
                 cliente.Enderecos = await _scContext.Enderecos.Where(e => e.ClienteId == cliente.Id).ToListAsync();
                 clientesDto.Add(_mapper.Map<LerTodosClientesDto>(cliente));
             }
+
             return Ok(clientesDto);
         }
 
@@ -110,12 +113,19 @@ namespace SisClientes.Controllers
         [HttpDelete(template: "clientes/{id}")]
         public async Task<IActionResult> DeletarClienteAsync(Guid id)
         {
-            var cliente = _scContext.Clientes.FirstOrDefaultAsync(c => c.Id == id);
+            var cliente = await _scContext.Clientes.FirstOrDefaultAsync(c => c.Id == id);
             if (cliente == null) return NotFound();
 
-            _scContext.Remove(cliente);
-            await _scContext.SaveChangesAsync();
-            return NoContent();
+            try
+            {
+                _scContext.Clientes.Remove(cliente);
+                await _scContext.SaveChangesAsync();
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
     }
 }
