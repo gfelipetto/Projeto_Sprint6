@@ -1,13 +1,7 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using SisClientes.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using SisClientes.Data.Dtos;
-using SisClientes.HttpClients;
-using SisClientes.Models;
+using SisClientes.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SisClientes.Controllers
@@ -16,43 +10,25 @@ namespace SisClientes.Controllers
     [Route(template: "v1")]
     public class ClientesController : ControllerBase
     {
-        private readonly SisClientesDbContext _scContext;
-        private readonly IMapper _mapper;
-        private readonly CepApiClient _cepApiCliet;
-        public ClientesController(SisClientesDbContext sisClienteContext, IMapper mapper, CepApiClient cepClient)
+        private ClientesService _clientesService;
+        public ClientesController(ClientesService cs)
         {
-            _scContext = sisClienteContext;
-            _mapper = mapper;
-            _cepApiCliet = cepClient;
+            _clientesService = cs;
         }
 
         [HttpGet(template: "clientes")]
         public async Task<IActionResult> GetTodosClientesAsync()
         {
-            var clientesDto = new List<LerTodosClientesDto>();
-
-            var listaClientes = await _scContext.Clientes.ToListAsync();
-            foreach (var cliente in listaClientes)
-            {
-                cliente.ResidenteDe = await _scContext.Cidades.FirstOrDefaultAsync(c => c.Id == cliente.CidadeId);
-                cliente.Enderecos = await _scContext.Enderecos.Where(e => e.ClienteId == cliente.Id).ToListAsync();
-                clientesDto.Add(_mapper.Map<LerTodosClientesDto>(cliente));
-            }
-
-            return Ok(clientesDto);
+            var resultado = await _clientesService.GetTodosClientesAsync();
+            return Ok(resultado);
         }
 
         [HttpGet(template: "clientes/{id}")]
         public async Task<IActionResult> GetClientePorIdAsync(Guid id)
         {
-            var cliente = await _scContext.Clientes.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
-            if (cliente == null) return NotFound();
-
-            cliente.ResidenteDe = await _scContext.Cidades.FirstOrDefaultAsync(c => c.Id == cliente.CidadeId);
-            cliente.Enderecos = await _scContext.Enderecos.Where(e => e.ClienteId == cliente.Id).ToListAsync();
-            var clienteDto = _mapper.Map<LerTodosClientesDto>(cliente);
-            return Ok(clienteDto);
-
+            var resultado = await _clientesService.GetClientePorIdAsync(id);
+            if (resultado == null) return NotFound();
+            return Ok(resultado);
         }
 
         [HttpPost(template: "clientes")]
@@ -60,28 +36,9 @@ namespace SisClientes.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(clienteNovoDto);
 
-            var cepCliente = await _cepApiCliet.GetCepAsync(clienteNovoDto.Cep);
-            var cidadeCliente = await _scContext.Cidades.FirstOrDefaultAsync(c => c.Nome == cepCliente.Localidade && c.Estado == cepCliente.UF);
-            if (cidadeCliente == null)
-            {
-                cidadeCliente = new Cidades
-                {
-                    Nome = cepCliente.Localidade,
-                    Estado = cepCliente.UF,
-                };
-                _scContext.Cidades.Add(cidadeCliente);
-            }
-
-            var novoCliente = new Clientes
-            {
-                Nome = clienteNovoDto.Nome,
-                DataNascimento = clienteNovoDto.DataNascimento,
-                CidadeId = cidadeCliente.Id,
-            };
-
-            _scContext.Clientes.Add(novoCliente);
-            await _scContext.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetClientePorIdAsync), new { id = novoCliente.Id }, novoCliente);
+            var resultado = await _clientesService.CadastrarNovoClienteAsync(clienteNovoDto);
+            if (resultado == null) return BadRequest();
+            return CreatedAtAction(nameof(GetClientePorIdAsync), new { id = resultado.Id }, resultado);
         }
 
         [HttpPut(template: "clientes/{id}")]
@@ -89,43 +46,17 @@ namespace SisClientes.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(clienteAtualizadoDto);
 
-            var cliente = await _scContext.Clientes.FirstOrDefaultAsync(c => c.Id == id);
-            if (cliente == null) return NotFound();
-
-            var cepCliente = await _cepApiCliet.GetCepAsync(clienteAtualizadoDto.Cep);
-            var cidadeCliente = await _scContext.Cidades.FirstOrDefaultAsync(c => c.Nome == cepCliente.Localidade && c.Estado == cepCliente.UF);
-            if (cidadeCliente == null)
-            {
-                cidadeCliente = new Cidades
-                {
-                    Nome = cepCliente.Localidade,
-                    Estado = cepCliente.UF,
-                };
-                _scContext.Cidades.Add(cidadeCliente);
-            }
-
-            cliente.CidadeId = cidadeCliente.Id;
-            _mapper.Map(clienteAtualizadoDto, cliente);
-            await _scContext.SaveChangesAsync();
+            var resultado = await _clientesService.AtualizarClienteAsync(id, clienteAtualizadoDto);
+            if (resultado.IsFailed) return BadRequest(resultado.Errors);
             return NoContent();
         }
 
         [HttpDelete(template: "clientes/{id}")]
         public async Task<IActionResult> DeletarClienteAsync(Guid id)
         {
-            var cliente = await _scContext.Clientes.FirstOrDefaultAsync(c => c.Id == id);
-            if (cliente == null) return NotFound();
-
-            try
-            {
-                _scContext.Clientes.Remove(cliente);
-                await _scContext.SaveChangesAsync();
-                return NoContent();
-            }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
+            var resultado = await _clientesService.DeletarClienteAsync(id);
+            if (resultado.IsFailed) return BadRequest(resultado.Errors);
+            return NoContent();
         }
     }
 }

@@ -1,11 +1,7 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using SisClientes.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using SisClientes.Data.Dtos;
-using SisClientes.Models;
+using SisClientes.Services;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SisClientes.Controllers
@@ -14,36 +10,25 @@ namespace SisClientes.Controllers
     [Route(template: "v1")]
     public class EnderecosController : ControllerBase
     {
-        private readonly SisClientesDbContext _scContext;
-        private readonly IMapper _mapper;
-        public EnderecosController(SisClientesDbContext sisContext, IMapper mapper)
+        private EnderecosService _enderecosService;
+        public EnderecosController(EnderecosService es)
         {
-            _scContext = sisContext;
-            _mapper = mapper;
+            _enderecosService = es;
         }
 
         [HttpGet(template: "enderecos")]
         public async Task<IActionResult> GetTodosEnderecosAsync()
         {
-            var enderecosDto = new List<LerTodosEnderecosDto>();
-
-            var listaEnderecos = await _scContext.Enderecos.ToListAsync();
-            foreach (var endereco in listaEnderecos)
-            {
-                enderecosDto.Add(_mapper.Map<LerTodosEnderecosDto>(endereco));
-            }
-
-            return Ok(listaEnderecos);
+            var resultado = await _enderecosService.GetTodosEnderecosAsync();
+            return Ok(resultado);
         }
 
         [HttpGet(template: "enderecos/{id}")]
         public async Task<IActionResult> GetEnderecoPorIdAsync(Guid id)
         {
-            var endereco = await _scContext.Enderecos.FirstOrDefaultAsync(e => e.Id == id);
-            if (endereco == null) return NotFound();
-
-            var enderecoDto = _mapper.Map<LerTodosEnderecosDto>(endereco);
-            return Ok(enderecoDto);
+            var resultado = await _enderecosService.GetEnderecoPorIdAsync(id);
+            if (resultado == null) return NotFound();
+            return Ok(resultado);
         }
 
 
@@ -52,21 +37,9 @@ namespace SisClientes.Controllers
         {
             if (!ModelState.IsValid) return BadRequest();
 
-            var cliente = await _scContext.Clientes.FirstOrDefaultAsync(c => c.Id == id);
-            if (cliente == null) return NotFound();
-
-            var novoEndereco = new Enderecos
-            {
-                ClienteId = cliente.Id,
-                Cep = novoEnderecoDto.Cep,
-                Logradouro = novoEnderecoDto.Logradouro,
-                Bairro = novoEnderecoDto.Bairro,
-                NumeroCasa = novoEnderecoDto.NumeroCasa,
-                Complemento = novoEnderecoDto.Complemento
-            };
-            _scContext.Enderecos.Add(novoEndereco);
-            await _scContext.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetEnderecoPorIdAsync), new { id = novoEndereco.Id}, novoEndereco);
+            var resultado = await _enderecosService.CadastrarNovoEnderecoAsync(id, novoEnderecoDto);
+            if (resultado == null) return NotFound();
+            return CreatedAtAction(nameof(GetEnderecoPorIdAsync), new { id = resultado.Id }, resultado);
         }
 
         [HttpPut(template: "enderecos/{id}")]
@@ -74,22 +47,16 @@ namespace SisClientes.Controllers
         {
             if (!ModelState.IsValid) return BadRequest();
 
-            var endereco = await _scContext.Enderecos.FirstOrDefaultAsync(e => e.Id == id);
-            if (endereco == null) return NotFound();
-
-            _mapper.Map(enderecoAtualizado, endereco);
-            await _scContext.SaveChangesAsync();
+            var resultado = await _enderecosService.AtualizarEnderecoAsync(id, enderecoAtualizado);
+            if (resultado.IsFailed) return NotFound(resultado.Errors);
             return NoContent();
         }
 
         [HttpDelete(template:"enderecos/{id}")]
         public async Task<IActionResult> DeletarEnderecoAsync(Guid id)
         {
-            var endereco = await _scContext.Enderecos.FirstOrDefaultAsync(e => e.Id == id);
-            if (endereco == null) return NotFound();
-
-            _scContext.Remove(endereco);
-            await _scContext.SaveChangesAsync();
+            var resultado = await _enderecosService.DeletarEnderecoAsync(id);
+            if (resultado.IsFailed) return NotFound(resultado.Errors);
             return NoContent();
         }
     }

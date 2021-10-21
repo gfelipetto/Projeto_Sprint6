@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "p9EqfPXEIIknbTQF0tGfq8VFEDftKOpSXztULLYGkLmyU4C5M+ZHxrD35c19LcDirX/MJlpPnnBkK3e+j6uqTg==",
+  "dgSpecHash": "hApeWeay5aU8mVuYNMYpPGTV7nrTyV29g7w7cegO4glt1IQQdAhP4K+P1HGYBtgZshW9dmVjSIg0CvCtNmk5Hw==",
   "success": true,
   "projectFilePath": "C:\\Users\\gfeli\\Desktop\\Projeto_Sprint6\\ProjetoSprint6\\SisClientes\\SisClientes.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gfeli\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\gfeli\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
+    "C:\\Users\\gfeli\\.nuget\\packages\\fluentresults\\2.6.0\\fluentresults.2.6.0.nupkg.sha512",
     "C:\\Users\\gfeli\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\gfeli\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.7\\microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512",
     "C:\\Users\\gfeli\\.nuget\\packages\\microsoft.bcl\\1.1.10\\microsoft.bcl.1.1.10.nupkg.sha512",

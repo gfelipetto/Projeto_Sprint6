@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using SisClientes.Data;
 using SisClientes.HttpClients;
+using SisClientes.Services;
 using System;
 
 namespace SisClientes
@@ -24,7 +25,10 @@ namespace SisClientes
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<SisClientesDbContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("SisClientesConnection")));
-            
+            services.AddScoped<CidadesService, CidadesService>();
+            services.AddScoped<ClientesService, ClientesService>();
+            services.AddScoped<EnderecosService, EnderecosService>();
+
             services.AddHttpClient<CepApiClient>(client =>
             {
                 client.BaseAddress = new Uri("https://viacep.com.br/ws/");
