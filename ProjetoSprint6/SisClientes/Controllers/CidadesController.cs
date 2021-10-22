@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SisClientes.Controllers
 {
     [ApiController]
-    [Route(template: "v1")]
+    [Route(template: "v1/SisClientes")]
     public class CidadesController : ControllerBase
     {
         private CidadesService _cidadeService;
