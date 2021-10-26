@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SisProdutos.Migrations
 {
-    public partial class CriandoBanco : Migration
+    public partial class AdicionandoDbIdentity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

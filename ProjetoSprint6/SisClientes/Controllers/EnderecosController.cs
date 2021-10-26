@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SisClientes.Controllers
 {
     [ApiController]
-    [Route(template: "v1/SisClientes")]
+    [Route(template: "v1/SisClientes/endereco")]
     public class EnderecosController : ControllerBase
     {
         private EnderecosService _enderecosService;
@@ -16,14 +16,14 @@ namespace SisClientes.Controllers
             _enderecosService = es;
         }
 
-        [HttpGet(template: "enderecos")]
+        [HttpGet(template: "mostrar")]
         public async Task<IActionResult> GetTodosEnderecosAsync()
         {
             var resultado = await _enderecosService.GetTodosEnderecosAsync();
             return Ok(resultado);
         }
 
-        [HttpGet(template: "enderecos/{id}")]
+        [HttpGet(template: "mostrar/{id}")]
         public async Task<IActionResult> GetEnderecoPorIdAsync(Guid id)
         {
             var resultado = await _enderecosService.GetEnderecoPorIdAsync(id);
@@ -32,7 +32,7 @@ namespace SisClientes.Controllers
         }
 
 
-        [HttpPost(template: "enderecos/{id}")]
+        [HttpPost(template: "cadastrar/{id}")]
         public async Task<IActionResult> CadastrarNovoEnderecoAsync(Guid id, [FromBody] CadastrarNovoEnderecoDto novoEnderecoDto)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -42,7 +42,7 @@ namespace SisClientes.Controllers
             return CreatedAtAction(nameof(GetEnderecoPorIdAsync), new { id = resultado.Id }, resultado);
         }
 
-        [HttpPut(template: "enderecos/{id}")]
+        [HttpPut(template: "atualizar/{id}")]
         public async Task<IActionResult> AtualizarEnderecoAsync(Guid id, [FromBody] AtualizarEnderecoDto enderecoAtualizado)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -52,7 +52,7 @@ namespace SisClientes.Controllers
             return NoContent();
         }
 
-        [HttpDelete(template:"enderecos/{id}")]
+        [HttpDelete(template:"remover/{id}")]
         public async Task<IActionResult> DeletarEnderecoAsync(Guid id)
         {
             var resultado = await _enderecosService.DeletarEnderecoAsync(id);

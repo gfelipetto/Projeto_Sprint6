@@ -100,6 +100,10 @@ namespace SisClientes.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Complemento");
 
+                    b.Property<bool>("EhPrincipal")
+                        .HasColumnType("bit")
+                        .HasColumnName("EhPrincipal");
+
                     b.Property<string>("Logradouro")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")

@@ -51,7 +51,8 @@ namespace SisClientes.Services
                 Logradouro = novoEnderecoDto.Logradouro,
                 Bairro = novoEnderecoDto.Bairro,
                 NumeroCasa = novoEnderecoDto.NumeroCasa,
-                Complemento = novoEnderecoDto.Complemento
+                Complemento = novoEnderecoDto.Complemento,
+                EhPrincipal = novoEnderecoDto.EhPrincipal
             };
             _scContext.Enderecos.Add(novoEndereco);
             await _scContext.SaveChangesAsync();

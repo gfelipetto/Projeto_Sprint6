@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace SisProdutos.Controllers
 {
     [ApiController]
-    [Route(template: "v1/SisProdutos")]
+    [Route(template: "v1/SisProdutos/usuario")]
     public class LogoutController : ControllerBase
     {
         private LogoutService _logoutService;

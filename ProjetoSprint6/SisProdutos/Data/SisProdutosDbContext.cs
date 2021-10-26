@@ -1,18 +1,25 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using SisProdutos.Data.Configurations;
+using SisProdutos.Models;
 
 namespace SisProdutos.Data
 {
-    public class SisProdutosDbContext : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
+    public class SisProdutosDbContext : DbContext
     {
         public SisProdutosDbContext(DbContextOptions<SisProdutosDbContext> options) : base(options)
-        { }
+        {}
 
+        public DbSet<Produtos> Produtos { get; set; }
+        public DbSet<ProdutoCidades> ProdutoCidades { get; set; }
+        public DbSet<Categorias> Categorias { get; set; }
+        public DbSet<PalavrasChave> PalavrasChave { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new ProdutosConfiguration());
+            modelBuilder.ApplyConfiguration(new ProdutoCidadesConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoriasConfiguration());
+            modelBuilder.ApplyConfiguration(new PalavrasChaveConfiguration());
+        }
     }
 }

@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SisProdutos.Data;
 
 namespace SisProdutos.Migrations
 {
-    [DbContext(typeof(SisProdutosDbContext))]
-    [Migration("20211022144849_CriandoBanco")]
-    partial class CriandoBanco
+    [DbContext(typeof(SisProdutosIdentityDbContext))]
+    partial class SisProdutosIdentityDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

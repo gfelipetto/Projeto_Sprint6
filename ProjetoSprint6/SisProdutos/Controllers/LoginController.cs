@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace SisProdutos.Controllers
 {
     [ApiController]
-    [Route(template: "v1/SisProdutos")]
+    [Route(template: "v1/SisProdutos/usuario")]
     public class LoginController : ControllerBase
     {
         private LoginService _loginService;

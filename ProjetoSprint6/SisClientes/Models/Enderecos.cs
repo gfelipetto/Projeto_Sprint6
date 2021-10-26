@@ -11,5 +11,6 @@ namespace SisClientes.Models
         public string Bairro { get; set; }
         public string NumeroCasa { get; set; }
         public string  Complemento { get; set; }
+        public bool EhPrincipal { get; set; }
     }
 }

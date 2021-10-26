@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31613.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SisClientes", "SisClientes\SisClientes.csproj", "{C623AD30-9F68-43E6-859C-D27121B764CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SisClientes", "SisClientes\SisClientes.csproj", "{C623AD30-9F68-43E6-859C-D27121B764CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SisProdutos", "SisProdutos\SisProdutos.csproj", "{DD9A1555-9CA6-4205-B891-28350BCE30F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SisProdutos", "SisProdutos\SisProdutos.csproj", "{DD9A1555-9CA6-4205-B891-28350BCE30F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auditoria", "Auditoria\Auditoria.csproj", "{5208528F-3DC6-408F-A26F-3F706877239E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{DD9A1555-9CA6-4205-B891-28350BCE30F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD9A1555-9CA6-4205-B891-28350BCE30F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD9A1555-9CA6-4205-B891-28350BCE30F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5208528F-3DC6-408F-A26F-3F706877239E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5208528F-3DC6-408F-A26F-3F706877239E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5208528F-3DC6-408F-A26F-3F706877239E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5208528F-3DC6-408F-A26F-3F706877239E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

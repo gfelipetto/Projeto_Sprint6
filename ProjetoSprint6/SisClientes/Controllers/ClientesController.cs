@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SisClientes.Controllers
 {
     [ApiController]
-    [Route(template: "v1/SisClientes")]
+    [Route(template: "v1/SisClientes/cliente")]
     public class ClientesController : ControllerBase
     {
         private ClientesService _clientesService;
@@ -16,22 +16,31 @@ namespace SisClientes.Controllers
             _clientesService = cs;
         }
 
-        [HttpGet(template: "clientes")]
+        [HttpGet(template: "mostrar")]
         public async Task<IActionResult> GetTodosClientesAsync()
         {
             var resultado = await _clientesService.GetTodosClientesAsync();
             return Ok(resultado);
         }
 
-        [HttpGet(template: "clientes/{id}")]
+        [HttpGet(template: "mostrar/{id}")]
         public async Task<IActionResult> GetClientePorIdAsync(Guid id)
         {
             var resultado = await _clientesService.GetClientePorIdAsync(id);
             if (resultado == null) return NotFound();
             return Ok(resultado);
         }
+        [HttpPost(template: "cadastrar/{id}")]
+        public async Task<IActionResult> CadastrarNovoClienteAsync(Guid id, [FromBody] CadastrarClienteDto clienteNovoDto)
+        {
+            if (!ModelState.IsValid) return BadRequest(clienteNovoDto);
 
-        [HttpPost(template: "clientes")]
+            var resultado = await _clientesService.CadastrarNovoClienteViaHttpAsync(clienteNovoDto, id);
+            if (resultado == null) return BadRequest();
+            return CreatedAtAction(nameof(GetClientePorIdAsync), new { id = resultado.Id }, resultado);
+        }
+
+        [HttpPost(template: "cadastrar")]
         public async Task<IActionResult> CadastrarNovoClienteAsync([FromBody] CadastrarClienteDto clienteNovoDto)
         {
             if (!ModelState.IsValid) return BadRequest(clienteNovoDto);
@@ -41,7 +50,7 @@ namespace SisClientes.Controllers
             return CreatedAtAction(nameof(GetClientePorIdAsync), new { id = resultado.Id }, resultado);
         }
 
-        [HttpPut(template: "clientes/{id}")]
+        [HttpPut(template: "atualizar/{id}")]
         public async Task<IActionResult> AtualizarClienteAsync(Guid id, [FromBody] AtualizarClienteDto clienteAtualizadoDto)
         {
             if (!ModelState.IsValid) return BadRequest(clienteAtualizadoDto);
@@ -51,7 +60,7 @@ namespace SisClientes.Controllers
             return NoContent();
         }
 
-        [HttpDelete(template: "clientes/{id}")]
+        [HttpDelete(template: "remover/{id}")]
         public async Task<IActionResult> DeletarClienteAsync(Guid id)
         {
             var resultado = await _clientesService.DeletarClienteAsync(id);

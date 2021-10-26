@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SisClientes.Controllers
 {
     [ApiController]
-    [Route(template: "v1/SisClientes")]
+    [Route(template: "v1/SisClientes/cidade")]
     public class CidadesController : ControllerBase
     {
         private CidadesService _cidadeService;
@@ -16,14 +16,14 @@ namespace SisClientes.Controllers
             _cidadeService = cs;
         }
 
-        [HttpGet(template: "cidades")]
+        [HttpGet(template: "mostrar")]
         public async Task<IActionResult> GetTodasCidadesAsync()
         {
             var resultado = await _cidadeService.GetTodasCidadesAsync();
             return Ok(resultado);
         }
 
-        [HttpGet(template: "cidades/{id}")]
+        [HttpGet(template: "mostrar/{id}")]
         public async Task<IActionResult> GetCidadePorIdAsync(Guid id)
         {
             var resultado = await _cidadeService.GetCidadePorIdAsync(id);
@@ -31,7 +31,7 @@ namespace SisClientes.Controllers
             return Ok(resultado);
         }
 
-        [HttpPost(template: "cidades/{cep}")]
+        [HttpPost(template: "cadastrar/{cep}")]
         public async Task<IActionResult> CadastrarNovaCidadeAsync(string cep)
         {
             var resultado = await _cidadeService.CadastrarNovaCidadeAsync(cep);
@@ -39,7 +39,7 @@ namespace SisClientes.Controllers
             return CreatedAtAction(nameof(GetCidadePorIdAsync), new { id = resultado.Id }, resultado);
         }
 
-        [HttpPut(template: "cidades/{id}")]
+        [HttpPut(template: "atualizar/{id}")]
         public async Task<IActionResult> AtualizarCidadeAsync(Guid id, [FromBody] AtualizarCidadeDto cidadeAtualizadaDto)
         {
             if (!ModelState.IsValid) return BadRequest(cidadeAtualizadaDto);
@@ -48,7 +48,7 @@ namespace SisClientes.Controllers
             return NoContent();
         }
 
-        [HttpDelete(template: "cidades/{id}")]
+        [HttpDelete(template: "remover/{id}")]
         public async Task<IActionResult> DeletarClienteAsync(Guid id)
         {
             var resultado = await _cidadeService.DeletarClienteAsync(id);

@@ -38,6 +38,34 @@ namespace SisClientes.Services
 
             return clientesDto;
         }
+        public async Task<Clientes> CadastrarNovoClienteViaHttpAsync(CadastrarClienteDto clienteNovoDto, Guid id)
+        {
+            var cepCliente = await _cepApiCliet.GetCepAsync(clienteNovoDto.Cep);
+            if (cepCliente == null) return null;
+
+            var cidadeCliente = await _scContext.Cidades.FirstOrDefaultAsync(c => c.Nome == cepCliente.Localidade && c.Estado == cepCliente.UF);
+            if (cidadeCliente == null)
+            {
+                cidadeCliente = new Cidades
+                {
+                    Nome = cepCliente.Localidade,
+                    Estado = cepCliente.UF,
+                };
+                _scContext.Cidades.Add(cidadeCliente);
+            }
+
+            var novoCliente = new Clientes
+            {
+                Id = id,
+                Nome = clienteNovoDto.Nome,
+                DataNascimento = clienteNovoDto.DataNascimento,
+                CidadeId = cidadeCliente.Id,
+            };
+
+            _scContext.Clientes.Add(novoCliente);
+            await _scContext.SaveChangesAsync();
+            return novoCliente;
+        }
         public async Task<LerTodosClientesDto> GetClientePorIdAsync(Guid id)
         {
             var cliente = await _scContext.Clientes.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);

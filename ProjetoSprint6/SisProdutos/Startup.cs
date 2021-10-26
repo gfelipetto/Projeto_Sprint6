@@ -6,9 +6,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using SisProdutos.Data;
+using SisProdutos.HttpClients;
 using SisProdutos.Services;
 using System;
+using System.Text.Json.Serialization;
 
 namespace SisProdutos
 {
@@ -25,14 +28,23 @@ namespace SisProdutos
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<SisProdutosIdentityDbContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("SisProdutosConnection")));
             services.AddDbContext<SisProdutosDbContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("SisProdutosConnection")));
-            services.AddIdentity<IdentityUser<Guid>, IdentityRole<Guid>>().AddEntityFrameworkStores<SisProdutosDbContext>();
-            
+
+            services.AddIdentity<IdentityUser<Guid>, IdentityRole<Guid>>().AddEntityFrameworkStores<SisProdutosIdentityDbContext>();
+
             services.AddScoped<CadastraService, CadastraService>();
             services.AddScoped<LoginService, LoginService>();
             services.AddScoped<TokenService, TokenService>();
             services.AddScoped<LogoutService, LogoutService>();
+            services.AddScoped<ProdutosService, ProdutosService>();
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddHttpClient<SisClientesApiClient>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:5001/");
+            });
 
             services.AddSwaggerGen(c =>
             {

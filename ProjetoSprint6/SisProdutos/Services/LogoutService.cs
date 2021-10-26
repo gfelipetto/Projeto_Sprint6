@@ -7,13 +7,11 @@ namespace SisProdutos.Services
 {
     public class LogoutService
     {
-        private SignInManager<IdentityUser<Guid>> _signManager;
-
+        private readonly SignInManager<IdentityUser<Guid>> _signManager;
         public LogoutService(SignInManager<IdentityUser<Guid>> signManager)
         {
             _signManager = signManager;
         }
-
         public Result DeslogarUsuario()
         {
             Task resultadoIdentity = _signManager.SignOutAsync();

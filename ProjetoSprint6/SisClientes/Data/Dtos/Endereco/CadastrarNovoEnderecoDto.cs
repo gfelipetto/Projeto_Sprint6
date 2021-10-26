@@ -14,5 +14,7 @@ namespace SisClientes.Data.Dtos
         [Required(ErrorMessage = "O campo NumeroCasa é obrigatório")]
         public string NumeroCasa { get; set; }
         public string Complemento { get; set; }
+        [Required(ErrorMessage = "O EhPrincipal é obrigatório")]
+        public bool EhPrincipal { get; set; }
     }
 }

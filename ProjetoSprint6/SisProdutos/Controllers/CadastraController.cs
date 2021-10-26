@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace SisProdutos.Controllers
 {
     [ApiController]
-    [Route(template: "v1/SisProdutos")]
+    [Route(template: "v1/SisProdutos/usuario")]
     public class CadastraController : ControllerBase
     {
         private CadastraService _cadastraService;
@@ -17,10 +17,10 @@ namespace SisProdutos.Controllers
         }
 
         [HttpPost(template: "cadastrar")]
-        public async Task<IActionResult> CadastraUsuarioAsync(CadastrarUsuarioDto novoUsuario)
+        public async Task<IActionResult> CadastraUsuarioAsync([FromBody]CadastrarUsuarioDto novoUsuario)
         {
             var resultado = await _cadastraService.CadastraUsuarioAsync(novoUsuario);
-            if (resultado.IsFailed) return StatusCode(500);
+            if (resultado.IsFailed) return BadRequest(resultado.Errors);
             return Ok();
         }
     }

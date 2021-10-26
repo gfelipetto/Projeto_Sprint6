@@ -36,6 +36,10 @@ namespace SisClientes.Data.Configurations
             builder.Property(e => e.Complemento)
                 .HasColumnName("Complemento")
                 .IsRequired();
+
+            builder.Property(e => e.EhPrincipal)
+                .HasColumnName("EhPrincipal")
+                .IsRequired();
         }
     }
 }

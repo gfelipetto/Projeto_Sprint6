@@ -9,15 +9,13 @@ namespace SisProdutos.Services
 {
     public class LoginService
     {
-        private SignInManager<IdentityUser<Guid>> _signManager;
-        private TokenService _tokenService;
-
+        private readonly SignInManager<IdentityUser<Guid>> _signManager;
+        private readonly TokenService _tokenService;
         public LoginService(SignInManager<IdentityUser<Guid>> signManager, TokenService tokenService)
         {
             _signManager = signManager;
             _tokenService = tokenService;
         }
-
         public async Task<Result> LogarUsuarioAsync(LoginRequest request)
         {
             SignInResult resultado = await _signManager.PasswordSignInAsync(request.UserName, request.Password, false, false);
