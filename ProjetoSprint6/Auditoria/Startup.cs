@@ -1,7 +1,10 @@
+using Auditoria.Data;
+using Auditoria.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +29,12 @@ namespace Auditoria
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<AuditoriaDbContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("AuditoriaConnection")));
+
+            services.AddScoped<AtividadesServices, AtividadesServices>();
+            services.AddScoped<ExcecoesServices, ExcecoesServices>();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

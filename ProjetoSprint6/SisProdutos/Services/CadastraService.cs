@@ -37,7 +37,7 @@ namespace SisProdutos.Services
                 }
                 return Result.Fail("Falha ao cadastrar usuário");
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return Result.Fail("Falha ao cadastrar usuário");
             }

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SisClientes", "SisClientes\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SisProdutos", "SisProdutos\SisProdutos.csproj", "{DD9A1555-9CA6-4205-B891-28350BCE30F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auditoria", "Auditoria\Auditoria.csproj", "{5208528F-3DC6-408F-A26F-3F706877239E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auditoria", "Auditoria\Auditoria.csproj", "{F9A4B931-AFA6-43BC-B5BC-69995C85428C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{DD9A1555-9CA6-4205-B891-28350BCE30F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD9A1555-9CA6-4205-B891-28350BCE30F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD9A1555-9CA6-4205-B891-28350BCE30F3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5208528F-3DC6-408F-A26F-3F706877239E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5208528F-3DC6-408F-A26F-3F706877239E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5208528F-3DC6-408F-A26F-3F706877239E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5208528F-3DC6-408F-A26F-3F706877239E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9A4B931-AFA6-43BC-B5BC-69995C85428C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9A4B931-AFA6-43BC-B5BC-69995C85428C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9A4B931-AFA6-43BC-B5BC-69995C85428C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9A4B931-AFA6-43BC-B5BC-69995C85428C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
