@@ -61,7 +61,7 @@ namespace SisProdutos.Services
             var clienteApi = await _sisClientesApiClient.GetClienteApiAsync(UsuarioId);
             var cidadeClienteApi = await _sisClientesApiClient.GetCidadeApiAsync(clienteApi.CidadeId);
 
-            var listaProdutos = await _sisProdutosDbContext.ProdutoCarrinho.ToListAsync();
+            var listaProdutos = await _sisProdutosDbContext.ProdutoCarrinho.Where(p => p.IdUsuario == UsuarioId).ToListAsync();
 
             decimal valorTotal = decimal.Zero;
             decimal frete = 29.90m;
