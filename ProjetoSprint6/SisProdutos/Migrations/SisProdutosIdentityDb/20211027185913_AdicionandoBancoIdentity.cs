@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace SisProdutos.Migrations
+namespace SisProdutos.Migrations.SisProdutosIdentityDb
 {
-    public partial class AdicionandoDbIdentity : Migration
+    public partial class AdicionandoBancoIdentity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

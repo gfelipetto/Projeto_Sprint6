@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SisProdutos.Data;
 
-namespace SisProdutos.Migrations.SisProdutosDb
+namespace SisProdutos.Migrations
 {
     [DbContext(typeof(SisProdutosDbContext))]
-    [Migration("20211026151640_AdicionandoDb")]
-    partial class AdicionandoDb
+    partial class SisProdutosDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,6 +40,36 @@ namespace SisProdutos.Migrations.SisProdutosDb
                     b.HasIndex("ProdutoId");
 
                     b.ToTable("Categorias");
+                });
+
+            modelBuilder.Entity("SisProdutos.Models.Compras", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Descricao");
+
+                    b.Property<Guid>("IdUsuario")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("IdUsuario");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Nome");
+
+                    b.Property<decimal>("Preco")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("Preco");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Compras");
                 });
 
             modelBuilder.Entity("SisProdutos.Models.PalavrasChave", b =>

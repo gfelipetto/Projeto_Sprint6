@@ -7,12 +7,13 @@ namespace SisProdutos.Data
     public class SisProdutosDbContext : DbContext
     {
         public SisProdutosDbContext(DbContextOptions<SisProdutosDbContext> options) : base(options)
-        {}
+        { }
 
         public DbSet<Produtos> Produtos { get; set; }
         public DbSet<ProdutoCidades> ProdutoCidades { get; set; }
         public DbSet<Categorias> Categorias { get; set; }
         public DbSet<PalavrasChave> PalavrasChave { get; set; }
+        public DbSet<Compras> ProdutoCarrinho { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -20,6 +21,7 @@ namespace SisProdutos.Data
             modelBuilder.ApplyConfiguration(new ProdutoCidadesConfiguration());
             modelBuilder.ApplyConfiguration(new CategoriasConfiguration());
             modelBuilder.ApplyConfiguration(new PalavrasChaveConfiguration());
+            modelBuilder.ApplyConfiguration(new ComprasConfiguration());
         }
     }
 }

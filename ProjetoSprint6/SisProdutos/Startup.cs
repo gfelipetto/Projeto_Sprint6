@@ -38,6 +38,7 @@ namespace SisProdutos
             services.AddScoped<TokenService, TokenService>();
             services.AddScoped<LogoutService, LogoutService>();
             services.AddScoped<ProdutosService, ProdutosService>();
+            services.AddScoped<ComprasService, ComprasService>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -45,6 +46,17 @@ namespace SisProdutos
             {
                 client.BaseAddress = new Uri("https://localhost:5001/");
             });
+
+            services.AddHttpClient<AuditoriaApiClient>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:7001/");
+            });
+
+            services.AddControllers().AddNewtonsoftJson(options =>
+             options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            );
+
+            services.AddHttpContextAccessor();
 
             services.AddSwaggerGen(c =>
             {

@@ -31,7 +31,7 @@ namespace Auditoria.Services
             var atividadeDto = _mapper.Map<LerAtividadeDto>(atividade);
             return atividadeDto;
         }
-        public async Task<RegistroDeAtividades> IncluirAtividade(IncluirAtividadeDto incluirAtividadeDto)
+        public async Task<RegistroDeAtividades> IncluirAtividadeAsync(IncluirAtividadeDto incluirAtividadeDto)
         {
             var novaAtividade = _mapper.Map<RegistroDeAtividades>(incluirAtividadeDto);
             await _auditoriaDbContext.RegistroDeAtividades.AddAsync(novaAtividade);

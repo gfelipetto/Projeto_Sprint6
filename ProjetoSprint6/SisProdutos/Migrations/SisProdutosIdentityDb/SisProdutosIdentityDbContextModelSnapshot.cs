@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SisProdutos.Data;
 
-namespace SisProdutos.Migrations
+namespace SisProdutos.Migrations.SisProdutosIdentityDb
 {
     [DbContext(typeof(SisProdutosIdentityDbContext))]
     partial class SisProdutosIdentityDbContextModelSnapshot : ModelSnapshot

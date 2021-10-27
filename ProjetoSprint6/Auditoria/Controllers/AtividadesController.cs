@@ -35,7 +35,7 @@ namespace Auditoria.Controllers
         [HttpPost(template: "incluir")]
         public async Task<IActionResult> IncluirAtividade([FromBody] IncluirAtividadeDto incluirAtividadeDto)
         {
-            var atividade = await _atividadesServices.IncluirAtividade(incluirAtividadeDto);
+            var atividade = await _atividadesServices.IncluirAtividadeAsync(incluirAtividadeDto);
             if (atividade == null) return BadRequest();
             return NoContent();
         }

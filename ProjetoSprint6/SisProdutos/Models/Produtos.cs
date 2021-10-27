@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace SisProdutos.Models
 {
@@ -9,7 +10,6 @@ namespace SisProdutos.Models
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public decimal Preco { get; set; }
-
 
         public IList<ProdutoCidades> Cidades { get; set; }
         public IList<PalavrasChave> PalavrasChave { get; set; }

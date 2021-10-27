@@ -3,23 +3,33 @@ using FluentResults;
 using Microsoft.EntityFrameworkCore;
 using SisProdutos.Data;
 using SisProdutos.Data.Dtos.Produto;
+using SisProdutos.HttpClients;
 using SisProdutos.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 namespace SisProdutos.Services
 {
     public class ProdutosService
     {
         private readonly SisProdutosDbContext _sisProdutosDbContext;
+        private readonly AuditoriaApiClient _auditoriaApiClient;
         private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ProdutosService(SisProdutosDbContext sisProdutosDbContext, IMapper mapper)
+        public Guid UsuarioId { get; }
+        public ProdutosService(SisProdutosDbContext sisProdutosDbContext, IMapper mapper, AuditoriaApiClient auditoriaApiClient, IHttpContextAccessor httpContextAccessor)
         {
             _sisProdutosDbContext = sisProdutosDbContext;
+            _auditoriaApiClient = auditoriaApiClient;
+            _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
+            UsuarioId = Guid.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
         }
         public async Task<Produtos> CadastrarNovoProdutoAsync(CadastrarProdutosDto produtoNovo)
         {
@@ -31,8 +41,6 @@ namespace SisProdutos.Services
                     Descricao = produtoNovo.Descricao,
                     Preco = produtoNovo.Preco
                 };
-                _sisProdutosDbContext.Produtos.Add(novoProduto);
-
                 if (produtoNovo.Cidade.Count > 0)
                 {
                     var listaCidades = new List<ProdutoCidades>();
@@ -42,11 +50,10 @@ namespace SisProdutos.Services
                         {
                             Nome = cidade.Nome,
                             Estado = cidade.Estado,
-                            ProdutoId = novoProduto.Id
                         };
                         listaCidades.Add(novaCidade);
                     }
-                    await _sisProdutosDbContext.ProdutoCidades.AddRangeAsync(listaCidades);
+                    novoProduto.Cidades = listaCidades;
                 }
 
                 if (produtoNovo.Categorias.Count > 0)
@@ -57,11 +64,10 @@ namespace SisProdutos.Services
                         var novaCategoria = new Categorias
                         {
                             Nome = categoria.Nome,
-                            ProdutoId = novoProduto.Id
                         };
                         listaCategorias.Add(novaCategoria);
                     }
-                    await _sisProdutosDbContext.Categorias.AddRangeAsync(listaCategorias);
+                    novoProduto.Categorias = listaCategorias;
                 }
 
                 if (produtoNovo.PalavrasChave.Count > 0)
@@ -72,50 +78,108 @@ namespace SisProdutos.Services
                         var novaPalavraChave = new PalavrasChave
                         {
                             Nome = palavraChave.Nome,
-                            ProdutoId = novoProduto.Id
                         };
                         listaPalavrasChave.Add(novaPalavraChave);
                     }
-                    await _sisProdutosDbContext.PalavrasChave.AddRangeAsync(listaPalavrasChave);
+                    novoProduto.PalavrasChave = listaPalavrasChave;
                 }
+                _sisProdutosDbContext.Produtos.Add(novoProduto);
 
                 await _sisProdutosDbContext.SaveChangesAsync();
                 return novoProduto;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                var novaExcecao = new ExcecaoApiClient
+                {
+                    UsuarioId = UsuarioId,
+                    Excecao = ex.Message
+                };
+                await _auditoriaApiClient.IncluirExcecaoAsync(novaExcecao);
                 return null;
             }
         }
         public async Task<Result> DeletarProdutoAsync(Guid id)
         {
-            var produto = _sisProdutosDbContext.Produtos.FirstOrDefault(p => p.Id == id);
-            if (produto == null) return Result.Fail("Produto não encontrado");
+            try
+            {
+                var produto = _sisProdutosDbContext.Produtos.FirstOrDefault(p => p.Id == id);
+                if (produto == null) return Result.Fail("Produto não encontrado");
 
-            _sisProdutosDbContext.Produtos.Remove(produto);
-            await _sisProdutosDbContext.SaveChangesAsync();
-            return Result.Ok();
+                _sisProdutosDbContext.Produtos.Remove(produto);
+                await _sisProdutosDbContext.SaveChangesAsync();
+                return Result.Ok();
+            }
+            catch (Exception ex)
+            {
+                var novaExcecao = new ExcecaoApiClient
+                {
+                    UsuarioId = UsuarioId,
+                    Excecao = ex.Message
+                };
+                await _auditoriaApiClient.IncluirExcecaoAsync(novaExcecao);
+                return Result.Fail(ex.Message);
+            }
         }
         public async Task<List<LerProdutoDto>> GetTodosProdutos(ProdutosFiltro filtro, ProdutosOrdem ordem)
         {
-            var listaProdutos = await _sisProdutosDbContext.Produtos
+            try
+            {
+                var listaProdutos = await _sisProdutosDbContext.Produtos
                 .Include("Cidades")
                 .Include("PalavrasChave")
                 .Include("Categorias")
-                .AplicarFiltro(_sisProdutosDbContext,filtro)
+                .AplicarFiltro(_sisProdutosDbContext, filtro)
                 .AplicarOrdem(ordem)
+                .AsNoTracking()
                 .ToListAsync();
 
-            var listaProdutosDto = _mapper.Map<List<Produtos>, List<LerProdutoDto>>(listaProdutos);
-            return listaProdutosDto;
+                var listaProdutosDto = _mapper.Map<List<Produtos>, List<LerProdutoDto>>(listaProdutos);
+                return listaProdutosDto;
+            }
+            catch (Exception ex)
+            {
+                var novaExcecao = new ExcecaoApiClient
+                {
+                    UsuarioId = UsuarioId,
+                    Excecao = ex.Message
+                };
+                await _auditoriaApiClient.IncluirExcecaoAsync(novaExcecao);
+                return null;
+            }
+            
         }
         public async Task<LerProdutoDto> GetProdutoPorIdAsync(Guid id)
         {
-            var produto = await _sisProdutosDbContext.Produtos.Include("Cidades").Include(p => p.PalavrasChave).Include("Categorias").AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
-            if (produto == null) return null;
+            try
+            {
+                var produto = await _sisProdutosDbContext.Produtos.Include("Cidades").Include("PalavrasChave").Include("Categorias").AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
+                if (produto == null) return null;
+                var novaAtividade = new AtividadeApiClient
+                {
+                    UsuarioId = UsuarioId,
+                    Nome = produto.Nome,
+                    Descricao = produto.Descricao,
+                    Preco = produto.Preco
+                };
 
-            var produtoDto = _mapper.Map<LerProdutoDto>(produto);
-            return produtoDto;
+                var resultado = await _auditoriaApiClient.IncluirAtividadeAsync(novaAtividade);
+                if (resultado.IsFailed) return null;
+
+                var produtoDto = _mapper.Map<LerProdutoDto>(produto);
+                return produtoDto;
+
+            }
+            catch (Exception ex)
+            {
+                var novaExcecao = new ExcecaoApiClient
+                {
+                    UsuarioId = UsuarioId,
+                    Excecao = ex.Message
+                };
+                await _auditoriaApiClient.IncluirExcecaoAsync(novaExcecao);
+                return null;
+            }
         }
     }
 }

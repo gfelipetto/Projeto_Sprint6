@@ -32,7 +32,7 @@ namespace SisProdutos.Services
                 IdentityResult resultadoIdentity = await _userManager.CreateAsync(usuarioIdentity, novoUsuario.Password);
                 if (resultadoIdentity.Succeeded)
                 {
-                    var resultado = await _sisClientesApiClient.CadastrarClienteApi(novoUsuario);
+                    var resultado = await _sisClientesApiClient.CadastrarClienteApiAsync(novoUsuario);
                     if(resultado.IsSuccess)return Result.Ok();
                 }
                 return Result.Fail("Falha ao cadastrar usuário");

@@ -7,6 +7,7 @@ namespace SisClientes.Data.Dtos
     {
         public string Nome { get; set; }
         public DateTime DataNascimento { get; set; }
+        public Guid CidadeId { get; set; }
         public LerCidadeSemClientesDto ResidenteDe { get; set; }
         public IList<LerTodosEnderecosDto> Enderecos { get; set; }
         public LerTodosClientesDto()

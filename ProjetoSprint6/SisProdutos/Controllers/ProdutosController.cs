@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace SisProdutos.Controllers
 {
     [ApiController]
-    //[Authorize]
+    [Authorize]
     [Route(template: "v1/SisProdutos/produtos")]
     public class ProdutosController : ControllerBase
     {
@@ -20,14 +20,14 @@ namespace SisProdutos.Controllers
         }
 
         [HttpGet(template: "mostrar")]
-        public IActionResult GetTodosProdutosAsync([FromQuery] ProdutosFiltro filtro, [FromQuery] ProdutosOrdem ordem)
+        public async Task<IActionResult> GetTodosProdutosAsync([FromQuery] ProdutosFiltro filtro, [FromQuery] ProdutosOrdem ordem)
         {
-            var produtos = _produtosService.GetTodosProdutos(filtro, ordem);
+            var produtos = await _produtosService.GetTodosProdutos(filtro, ordem);
             return Ok(produtos);
         }
 
         [HttpGet(template: "mostrar/{id}")]
-        public async Task<IActionResult> GetProdutoPorIdAsync(Guid id)
+        public async Task<IActionResult> GetProdutoPorIdAsync([FromRoute]Guid id)
         {
             var produto = await _produtosService.GetProdutoPorIdAsync(id);
             if (produto == null) return NotFound();
@@ -41,7 +41,8 @@ namespace SisProdutos.Controllers
 
             var resultado = await _produtosService.CadastrarNovoProdutoAsync(produtoNovo);
             if (resultado == null) return BadRequest();
-            return CreatedAtAction(nameof(GetProdutoPorIdAsync), new { id = resultado.Id }, resultado);
+            
+            return Ok(resultado);
         }
 
         [HttpDelete(template: "deletar/{id}")]

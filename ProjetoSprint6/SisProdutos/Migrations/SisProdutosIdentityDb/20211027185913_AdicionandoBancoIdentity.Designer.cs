@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SisProdutos.Data;
 
-namespace SisProdutos.Migrations
+namespace SisProdutos.Migrations.SisProdutosIdentityDb
 {
     [DbContext(typeof(SisProdutosIdentityDbContext))]
-    [Migration("20211026151551_AdicionandoDbIdentity")]
-    partial class AdicionandoDbIdentity
+    [Migration("20211027185913_AdicionandoBancoIdentity")]
+    partial class AdicionandoBancoIdentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

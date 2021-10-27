@@ -20,9 +20,9 @@ namespace SisProdutos.Controllers
             _comprasService = comprasService;
         }
         [HttpGet(template: "mostrar")]
-        public IActionResult GetListaDeComprasAsync()
+        public async Task<IActionResult> GetListaDeComprasAsync()
         {
-            var lista = _comprasService.GetListaDeComprasAsync();
+            var lista = await _comprasService.GetListaDeComprasAsync();
             return Ok(lista);
         }
 
@@ -42,11 +42,12 @@ namespace SisProdutos.Controllers
             return NoContent();
         }
 
-        //[HttpGet(template: "finalizar")]
-        //public async Task<IActionResult> FinalizarCompras()
-        //{
-        //    var resultado = _comprasService.FinalizarCompras();
-        //    var resultado 
-        //}
+        [HttpGet(template: "finalizar")]
+        public async Task<IActionResult> FinalizarCompras()
+        {
+            var resultado = await _comprasService.FinalizarCompras();
+            if (resultado.IsFailed) return Ok(resultado.Errors);
+            return Ok(resultado.Successes);
+        }
     }
 }
