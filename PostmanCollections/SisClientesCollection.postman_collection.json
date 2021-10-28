@@ -1,0 +1,427 @@
+{
+	"info": {
+		"_postman_id": "cd75a2ac-b34b-487d-baba-08f791fd290c",
+		"name": "SisClientesCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Mostrar todas as cidades",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/v1/SisClientes/cidade/mostrar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"SisClientes",
+						"cidade",
+						"mostrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar uma cidade por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/v1/SisClientes/cidade/mostrar/37bb1f7d-1bd1-4977-3925-08d99995e12a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"SisClientes",
+						"cidade",
+						"mostrar",
+						"37bb1f7d-1bd1-4977-3925-08d99995e12a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar uma nova cidade",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/v1/SisClientes/cidade/cadastrar/88200000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"SisClientes",
+						"cidade",
+						"cadastrar",
+						"88200000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar uma cidade",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Maceió\",\r\n  \"estado\": \"Alagoas\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/v1/SisClientes/cidade/atualizar/113e9a3d-79d9-436a-1286-08d99a187cbb",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"SisClientes",
+						"cidade",
+						"atualizar",
+						"113e9a3d-79d9-436a-1286-08d99a187cbb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar uma cidade",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/v1/SisClientes/cidade/remover/{id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"SisClientes",
+						"cidade",
+						"remover",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar todos os clientes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/v1/SisClientes/cliente/mostrar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"SisClientes",
+						"cliente",
+						"mostrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar um cliente por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/v1/SisClientes/cliente/mostrar/13ef4561-cf32-4e4c-a7c5-43c424ccf309",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"SisClientes",
+						"cliente",
+						"mostrar",
+						"13ef4561-cf32-4e4c-a7c5-43c424ccf309"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar um cliente com Id específico",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Roberto\",\r\n  \"dataNascimento\": \"2021-10-28T14:08:42.246Z\",\r\n  \"cep\": \"03420005\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/v1/SisClientes/cliente/cadastrar/a085c684-ea7e-4570-ad37-d1e3f9f976c4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"SisClientes",
+						"cliente",
+						"cadastrar",
+						"a085c684-ea7e-4570-ad37-d1e3f9f976c4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar um novo cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Alana\",\r\n  \"dataNascimento\": \"2021-10-28T14:08:42.246Z\",\r\n  \"cep\": \"97070330\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/v1/SisClientes/cliente/cadastrar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"SisClientes",
+						"cliente",
+						"cadastrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar um cliente",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Robson\",\r\n  \"dataNascimento\": \"2021-10-28T14:11:50.176Z\",\r\n  \"cep\": \"77305970\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/v1/SisClientes/cliente/atualizar/a085c684-ea7e-4570-ad37-d1e3f9f976c4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"SisClientes",
+						"cliente",
+						"atualizar",
+						"a085c684-ea7e-4570-ad37-d1e3f9f976c4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar um cliente",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/v1/SisClientes/cliente/remover/{id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"SisClientes",
+						"cliente",
+						"remover",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar todos os endereços",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/v1/SisClientes/endereco/mostrar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"SisClientes",
+						"endereco",
+						"mostrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostar um endereço por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/v1/SisClientes/endereco/mostrar/e2aee1f0-49f6-4d61-114b-08d99a1e2b6e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"SisClientes",
+						"endereco",
+						"mostrar",
+						"e2aee1f0-49f6-4d61-114b-08d99a1e2b6e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar um endereço para um cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cep\": \"97070330\",\r\n  \"logradouro\": \"Logradouro top\",\r\n  \"bairro\": \"Santos\",\r\n  \"numeroCasa\": \"666\",\r\n  \"complemento\": \"não sei\",\r\n  \"ehPrincipal\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/v1/SisClientes/endereco/cadastrar/13ef4561-cf32-4e4c-a7c5-43c424ccf309",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"SisClientes",
+						"endereco",
+						"cadastrar",
+						"13ef4561-cf32-4e4c-a7c5-43c424ccf309"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar um endereço",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cep\": \"string\",\r\n  \"logradouro\": \"string\",\r\n  \"bairro\": \"string\",\r\n  \"numeroCasa\": \"string\",\r\n  \"complemento\": \"string\",\r\n  \"ehPrincipal\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/v1/SisClientes/endereco/atualizar/e2aee1f0-49f6-4d61-114b-08d99a1e2b6e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"SisClientes",
+						"endereco",
+						"atualizar",
+						"e2aee1f0-49f6-4d61-114b-08d99a1e2b6e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar um endereço",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/v1/SisClientes/endereco/remover/e2aee1f0-49f6-4d61-114b-08d99a1e2b6e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"SisClientes",
+						"endereco",
+						"remover",
+						"e2aee1f0-49f6-4d61-114b-08d99a1e2b6e"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

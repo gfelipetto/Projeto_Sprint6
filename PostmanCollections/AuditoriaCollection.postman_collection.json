@@ -1,0 +1,161 @@
+{
+	"info": {
+		"_postman_id": "4c00cf10-b300-4efd-8c0e-45add4bb732d",
+		"name": "AuditoriaCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Mostrar todos atividades",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/v1/Auditoria/atividades/mostrar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"v1",
+						"Auditoria",
+						"atividades",
+						"mostrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostar uma atividade por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/v1/Auditoria/atividades/mostrar/{id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"v1",
+						"Auditoria",
+						"atividades",
+						"mostrar",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Incluir uma atividade",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"usuarioId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"nome\": \"string\",\r\n  \"descricao\": \"string\",\r\n  \"preco\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7000/v1/Auditoria/atividades/incluir",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"v1",
+						"Auditoria",
+						"atividades",
+						"incluir"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostar todas exceções",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/v1/Auditoria/excecoes/mostrar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"v1",
+						"Auditoria",
+						"excecoes",
+						"mostrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar uma exceção por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/v1/Auditoria/excecoes/mostrar/{id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"v1",
+						"Auditoria",
+						"excecoes",
+						"mostrar",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Incluir uma nova exceção",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"usuarioId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"excecao\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7000/v1/Auditoria/excecoes/incluir",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"v1",
+						"Auditoria",
+						"excecoes",
+						"incluir"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
