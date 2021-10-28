@@ -1,20 +1,20 @@
 # Microsserviço
 Projeto final desenvolvido no programa de bolsas Compasso UOL
 - Api SisClientes
-  - Responsável por gerenciar o cadastro de clientes.
-  - Cadastro de cidades via cep.
+  - Responsável por gerenciar o cadastro de clientes
+  - Cadastro de cidades via cep
   - Cadastro de múltiplos endereços
   
 - Api SisProdutos
-  - Responsável por gerenciar o cadastro de produtos.
-  - Sistema de login por usuário/senha, gerando token.
-  - Sistema de procura de produtos por nome, palavra-chave, descrição, categorias e ordenação por preço.
-  - Sistema de compras, adicionando produtos ao carrinho e cobrando frete para endereços diferentes do usuário.
+  - Responsável por gerenciar o cadastro de produtos
+  - Sistema de login por usuário/senha, gerando token
+  - Sistema de procura de produtos por nome, palavra-chave, descrição, categorias e ordenação por preço
+  - Sistema de compras, adicionando produtos ao carrinho e cobrando frete para endereços diferentes do usuário
   
 - Api Auditoria
-  - Responsável por armazenar o log.
+  - Responsável por armazenar o log
   - Registro de execeções lançadas pelo SisProdutos, por usuário
-  - Registro de chamada de endpoint, por usuário.
+  - Registro de chamada de endpoint, por usuário
 
 ## Tecnologias utilizadas
 - .NET Framework 5.0
