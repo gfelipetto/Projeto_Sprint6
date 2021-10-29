@@ -1,0 +1,394 @@
+{
+	"info": {
+		"_postman_id": "8fee025e-94d3-4885-b17a-eff334fd3c8f",
+		"name": "SisProdutosCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cadastrar um novo usuário",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"string\",\r\n  \"clientName\": \"string\",\r\n  \"birthDate\": \"2021-10-28T14:25:10.488Z\",\r\n  \"cep\": \"string\",\r\n  \"password\": \"string\",\r\n  \"rePassword\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6000/v1/SisProdutos/usuario/cadastrar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6000",
+					"path": [
+						"v1",
+						"SisProdutos",
+						"usuario",
+						"cadastrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Realizar login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"string\",\r\n  \"password\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6000/v1/SisProdutos/usuario/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6000",
+					"path": [
+						"v1",
+						"SisProdutos",
+						"usuario",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Realizar logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6000/v1/SisProdutos/usuario/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6000",
+					"path": [
+						"v1",
+						"SisProdutos",
+						"usuario",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar todos os produtos",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkdhYnJpZWwiLCJpZCI6ImQxMThlY2M0LTY3ZDktNDhiNy02YTY1LTA4ZDk5NTdkZDRmMSIsImV4cCI6MTYzNDkyNjU3MH0.kpYt0ccfiKYsnh4abWHW1Bh_GL7OvLbBqDmvHNhMt9s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6000/v1/SisProdutos/produtos/mostrar?Nome=&Descricao&PalavraChave&Categoria&Cidade&OrdenarPor",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6000",
+					"path": [
+						"v1",
+						"SisProdutos",
+						"produtos",
+						"mostrar"
+					],
+					"query": [
+						{
+							"key": "Nome",
+							"value": "",
+							"description": "Procura produtos com o nome informada"
+						},
+						{
+							"key": "Descricao",
+							"value": null,
+							"description": "Procura produtos com a descrição informada"
+						},
+						{
+							"key": "PalavraChave",
+							"value": null,
+							"description": "Procura produtos com a palavra-chace informada"
+						},
+						{
+							"key": "Categoria",
+							"value": null,
+							"description": "Procura produtos com a categoria informada"
+						},
+						{
+							"key": "Cidade",
+							"value": null,
+							"description": "Procura produtos com a cidade informada"
+						},
+						{
+							"key": "OrdenarPor",
+							"value": null,
+							"description": "Ordena produtos em ordem crescente e decrescente"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar um produto por Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkdhYnJpZWwiLCJpZCI6ImQxMThlY2M0LTY3ZDktNDhiNy02YTY1LTA4ZDk5NTdkZDRmMSIsImV4cCI6MTYzNDkyNjU3MH0.kpYt0ccfiKYsnh4abWHW1Bh_GL7OvLbBqDmvHNhMt9s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6000/v1/SisProdutos/produtos/mostrar/{id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6000",
+					"path": [
+						"v1",
+						"SisProdutos",
+						"produtos",
+						"mostrar",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastra um produto",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkdhYnJpZWwiLCJpZCI6ImQxMThlY2M0LTY3ZDktNDhiNy02YTY1LTA4ZDk5NTdkZDRmMSIsImV4cCI6MTYzNDkyNjU3MH0.kpYt0ccfiKYsnh4abWHW1Bh_GL7OvLbBqDmvHNhMt9s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"string\",\r\n  \"descricao\": \"string\",\r\n  \"preco\": 0,\r\n  \"cidade\": [\r\n    {\r\n      \"nome\": \"string\",\r\n      \"estado\": \"string\"\r\n    }\r\n  ],\r\n  \"palavrasChave\": [\r\n    {\r\n      \"nome\": \"string\"\r\n    }\r\n  ],\r\n  \"categorias\": [\r\n    {\r\n      \"nome\": \"string\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6000/v1/SisProdutos/produtos/cadastrar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6000",
+					"path": [
+						"v1",
+						"SisProdutos",
+						"produtos",
+						"cadastrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deleta um produto",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkdhYnJpZWwiLCJpZCI6ImQxMThlY2M0LTY3ZDktNDhiNy02YTY1LTA4ZDk5NTdkZDRmMSIsImV4cCI6MTYzNDkyNjU3MH0.kpYt0ccfiKYsnh4abWHW1Bh_GL7OvLbBqDmvHNhMt9s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6000/v1/SisProdutos/produtos/deletar/{id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6000",
+					"path": [
+						"v1",
+						"SisProdutos",
+						"produtos",
+						"deletar",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostra todos os produtos no carrinho",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkdhYnJpZWwiLCJpZCI6ImQxMThlY2M0LTY3ZDktNDhiNy02YTY1LTA4ZDk5NTdkZDRmMSIsImV4cCI6MTYzNDkyNjU3MH0.kpYt0ccfiKYsnh4abWHW1Bh_GL7OvLbBqDmvHNhMt9s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6000/v1/SisProdutos/compra/mostrar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6000",
+					"path": [
+						"v1",
+						"SisProdutos",
+						"compra",
+						"mostrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adiciona um produto por Id no carrinho",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkdhYnJpZWwiLCJpZCI6ImQxMThlY2M0LTY3ZDktNDhiNy02YTY1LTA4ZDk5NTdkZDRmMSIsImV4cCI6MTYzNDkyNjU3MH0.kpYt0ccfiKYsnh4abWHW1Bh_GL7OvLbBqDmvHNhMt9s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6000/v1/SisProdutos/compra/adicionar/{id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6000",
+					"path": [
+						"v1",
+						"SisProdutos",
+						"compra",
+						"adicionar",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deleta um produto por Id do carrinho",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkdhYnJpZWwiLCJpZCI6ImQxMThlY2M0LTY3ZDktNDhiNy02YTY1LTA4ZDk5NTdkZDRmMSIsImV4cCI6MTYzNDkyNjU3MH0.kpYt0ccfiKYsnh4abWHW1Bh_GL7OvLbBqDmvHNhMt9s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6000/v1/SisProdutos/compra/remover/{id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6000",
+					"path": [
+						"v1",
+						"SisProdutos",
+						"compra",
+						"remover",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Finaliza a compra do carrinho",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkdhYnJpZWwiLCJpZCI6ImQxMThlY2M0LTY3ZDktNDhiNy02YTY1LTA4ZDk5NTdkZDRmMSIsImV4cCI6MTYzNDkyNjU3MH0.kpYt0ccfiKYsnh4abWHW1Bh_GL7OvLbBqDmvHNhMt9s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6000/v1/SisProdutos/compra/finalizar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6000",
+					"path": [
+						"v1",
+						"SisProdutos",
+						"compra",
+						"finalizar"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
