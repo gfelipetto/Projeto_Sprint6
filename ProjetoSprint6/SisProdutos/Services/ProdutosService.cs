@@ -175,7 +175,6 @@ namespace SisProdutos.Services
 
                 var produtoDto = _mapper.Map<LerProdutoDto>(produto);
                 return Result.Ok().WithSuccess(JsonConvert.SerializeObject(produtoDto, Formatting.Indented));
-
             }
             catch (Exception ex)
             {
