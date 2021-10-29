@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace SisProdutos.Controllers
 {
     [ApiController]
-    [Authorize]
+    //[Authorize]
     [Route(template: "v1/SisProdutos/produtos")]
     public class ProdutosController : ControllerBase
     {
@@ -27,11 +27,11 @@ namespace SisProdutos.Controllers
         }
 
         [HttpGet(template: "mostrar/{id}")]
-        public async Task<IActionResult> GetProdutoPorIdAsync([FromRoute]Guid id)
+        public async Task<IActionResult> GetProdutoPorIdAsync(Guid id)
         {
             var produto = await _produtosService.GetProdutoPorIdAsync(id);
-            if (produto == null) return NotFound();
-            return Ok(produto);
+            if (produto.IsFailed) return NotFound(produto.Errors);
+            return Ok(produto.Successes);
         }
 
         [HttpPost(template: "cadastrar")]

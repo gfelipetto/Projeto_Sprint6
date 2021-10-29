@@ -26,7 +26,7 @@ namespace SisProdutos.HttpClients
             try
             {
                 HttpContent content = new StringContent(JsonConvert.SerializeObject(atividadeApiClient), Encoding.UTF8, "application/json");
-                var resposta = await _httpClient.PostAsync(_configuration.GetSection("EndpointAuditoria").Value, content);
+                var resposta = await _httpClient.PostAsync(_configuration.GetSection("EndpointAuditoriaAtividdades").Value, content);
 
                 resposta.EnsureSuccessStatusCode();
                 if (resposta.IsSuccessStatusCode) return Result.Ok();

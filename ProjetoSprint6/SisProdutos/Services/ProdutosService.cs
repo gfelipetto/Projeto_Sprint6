@@ -12,6 +12,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace SisProdutos.Services
 {
@@ -126,13 +127,13 @@ namespace SisProdutos.Services
             try
             {
                 var listaProdutos = await _sisProdutosDbContext.Produtos
-                .Include("Cidades")
-                .Include("PalavrasChave")
-                .Include("Categorias")
-                .AplicarFiltro(_sisProdutosDbContext, filtro)
-                .AplicarOrdem(ordem)
-                .AsNoTracking()
-                .ToListAsync();
+                    .Include("Cidades")
+                    .Include("PalavrasChave")
+                    .Include("Categorias")
+                    .AplicarFiltro(_sisProdutosDbContext, filtro)
+                    .AplicarOrdem(ordem)
+                    .AsNoTracking()
+                    .ToListAsync();
 
                 var listaProdutosDto = _mapper.Map<List<Produtos>, List<LerProdutoDto>>(listaProdutos);
                 return listaProdutosDto;
@@ -149,12 +150,18 @@ namespace SisProdutos.Services
             }
             
         }
-        public async Task<LerProdutoDto> GetProdutoPorIdAsync(Guid id)
+        public async Task<Result> GetProdutoPorIdAsync(Guid id)
         {
             try
             {
-                var produto = await _sisProdutosDbContext.Produtos.Include("Cidades").Include("PalavrasChave").Include("Categorias").AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
-                if (produto == null) return null;
+                var produto = await _sisProdutosDbContext.Produtos
+                    .Include("Cidades")
+                    .Include("PalavrasChave")
+                    .Include("Categorias")
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(p => p.Id == id);
+
+                if (produto == null) return Result.Fail("Produto não encontrado");
                 var novaAtividade = new AtividadeApiClient
                 {
                     UsuarioId = UsuarioId,
@@ -164,10 +171,10 @@ namespace SisProdutos.Services
                 };
 
                 var resultado = await _auditoriaApiClient.IncluirAtividadeAsync(novaAtividade);
-                if (resultado.IsFailed) return null;
+                if (resultado.IsFailed) return Result.Fail("Falha ao incluir uma atividade na auditoria");
 
                 var produtoDto = _mapper.Map<LerProdutoDto>(produto);
-                return produtoDto;
+                return Result.Ok().WithSuccess(JsonConvert.SerializeObject(produtoDto, Formatting.Indented));
 
             }
             catch (Exception ex)
